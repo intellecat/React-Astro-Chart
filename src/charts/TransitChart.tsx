@@ -1,0 +1,101 @@
+import React from 'react';
+import { ChartData } from '@astrologer/astro-core';
+import { AstroChart } from '../components/AstroChart';
+import { ZodiacWheel } from '../components/ZodiacWheel';
+import { PlanetRing } from '../components/PlanetRing';
+import { HouseLines } from '../components/HouseLines';
+import { AspectLines } from '../components/AspectLines';
+import { DegreeRings } from '../components/DegreeRings';
+
+export interface TransitChartProps {
+  natalData: ChartData;
+  transitData: ChartData;
+  width?: number;
+  height?: number;
+  className?: string;
+  onPlanetClick?: (id: string, source: 'natal' | 'transit') => void;
+}
+
+export const TransitChart: React.FC<TransitChartProps> = ({
+  natalData,
+  transitData,
+  width = 600,
+  height = 600,
+  className,
+  onPlanetClick
+}) => {
+  const mainRadius = Math.min(width, height) / 2;
+  const cx = width / 2;
+  const cy = height / 2;
+  
+  const transitBand = mainRadius * 0.15;
+  const innerRadius = mainRadius - transitBand;
+
+  return (
+    <AstroChart 
+      data={natalData} 
+      secondaryData={transitData}
+      width={width} 
+      height={height}
+      className={className}
+    >
+      {/* Background */}
+      <circle cx={cx} cy={cy} r={mainRadius} fill="var(--astro-color-paper)" />
+
+      {/* --- Inner Natal Chart --- */}
+      
+      {/* Zodiac */}
+      <ZodiacWheel 
+        outerRadius={innerRadius} 
+        innerRadius={innerRadius - 35} 
+        symbolRadius={innerRadius - 17}
+      />
+      
+      <DegreeRings 
+        degreeRadius={innerRadius - 35}
+      />
+
+      {/* House Lines (Natal) */}
+      <HouseLines 
+        radius={innerRadius * 0.55}
+        endRadius={innerRadius}
+        angleLabelRadius={innerRadius * 0.52}
+      />
+
+      {/* Inner Decorative */}
+      <circle cx={cx} cy={cy} r={innerRadius * 0.45} stroke="var(--astro-color-text)" strokeOpacity={0.1} fill="none" />
+
+      {/* Natal Planets */}
+      <PlanetRing 
+        symbolRadius={innerRadius - 60}
+        degreeRadius={innerRadius - 75}
+        tickRadius={innerRadius - 35}
+        tickLength={8}
+        onPlanetClick={onPlanetClick ? (id) => onPlanetClick(id, 'natal') : undefined}
+      />
+
+      {/* --- Outer Transit Ring --- */}
+      
+      {/* Boundary */}
+      <circle cx={cx} cy={cy} r={innerRadius} stroke="var(--astro-color-text)" strokeOpacity={0.2} fill="none" />
+
+      {/* Transit Planets */}
+      <PlanetRing 
+        dataSource="secondary"
+        symbolRadius={mainRadius - 25}
+        tickRadius={innerRadius}
+        tickLength={8}
+        degreeRadius={mainRadius - 6}
+        avoidHouses={false}
+        onPlanetClick={onPlanetClick ? (id) => onPlanetClick(id, 'transit') : undefined}
+      />
+
+      {/* Combined Aspects */}
+      <AspectLines 
+        dataSource="combined"
+        radius={innerRadius * 0.45}
+      />
+
+    </AstroChart>
+  );
+};

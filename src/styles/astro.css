@@ -1,0 +1,268 @@
+:root, [data-theme="light"] {
+  /* Backgrounds */
+  --astro-color-bg: #ffffff;
+  --astro-color-paper: #ffffff;
+  --astro-color-text: #333333;
+
+  /* Planets */
+  --astro-color-sun: #FFD700;
+  --astro-color-moon: #909090;
+  --astro-color-mercury: #87CEEB;
+  --astro-color-venus: #FF69B4;
+  --astro-color-mars: #FF4500;
+  --astro-color-jupiter: #DAA520;
+  --astro-color-saturn: #696969;
+  --astro-color-uranus: #40E0D0;
+  --astro-color-neptune: #4169E1;
+  --astro-color-pluto: #8B0000;
+  --astro-color-chiron: #9ACD32;
+  --astro-color-mean-node: #A52A2A;
+  --astro-color-true-node: #A52A2A;
+  --astro-color-mean-lilith: #000000;
+  --astro-color-vertex: #666666;
+  --astro-color-anti-vertex: #666666;
+  --astro-color-pars-fortunae: #333333;
+
+  /* Aspects */
+  --astro-color-aspect-conj: #FFD700;
+  --astro-color-aspect-opp: #FF4500;
+  --astro-color-aspect-trine: #32CD32;
+  --astro-color-aspect-square: #FF0000;
+  --astro-color-aspect-sextile: #1E90FF;
+  --astro-color-aspect-minor: #A9A9A9;
+
+  /* Elements */
+  --astro-color-fire: #e44d2e;
+  --astro-color-earth: #955e1c;
+  --astro-color-air: #87ceeb;
+  --astro-color-water: #27ae60;
+
+  /* Zodiac Icons */
+  --astro-color-zodiac-0: #333333;
+  --astro-color-zodiac-1: #333333;
+  --astro-color-zodiac-2: #333333;
+  --astro-color-zodiac-3: #333333;
+  --astro-color-zodiac-4: #333333;
+  --astro-color-zodiac-5: #333333;
+  --astro-color-zodiac-6: #333333;
+  --astro-color-zodiac-7: #333333;
+  --astro-color-zodiac-8: #333333;
+  --astro-color-zodiac-9: #333333;
+  --astro-color-zodiac-10: #333333;
+  --astro-color-zodiac-11: #333333;
+}
+/* Global */
+.astro-chart {
+  background-color: var(--astro-color-bg);
+}
+text {
+  font-family: sans-serif;
+  fill: var(--astro-color-text);
+}
+
+/* Zodiac Wheel */
+.astro-zodiac-ring {
+  fill: none;
+  stroke: var(--astro-color-text);
+  stroke-opacity: 0.2;
+  stroke-width: 1px;
+}
+.astro-zodiac-line {
+  stroke: var(--astro-color-text);
+  stroke-opacity: 0.2;
+  stroke-width: 1px;
+}
+.astro-zodiac-glyph {
+  font-size: 22px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: var(--astro-color-text);
+}
+.astro-zodiac-sign-bg {
+  fill-opacity: 0.2;
+  stroke: none;
+}
+.astro-zodiac-sign-bg.fire { fill: var(--astro-color-fire); }
+.astro-zodiac-sign-bg.earth { fill: var(--astro-color-earth); }
+.astro-zodiac-sign-bg.air { fill: var(--astro-color-air); }
+.astro-zodiac-sign-bg.water { fill: var(--astro-color-water); }
+
+/* Degree Rings */
+.astro-degree-tick {
+  stroke: var(--astro-color-text);
+  stroke-width: 0.5px;
+  opacity: 0.2;
+}
+.astro-degree-tick.major {
+  opacity: 0.5;
+}
+.astro-degree-tick.medium {
+  opacity: 0.3;
+}
+
+/* House Lines */
+.astro-house-ring {
+  fill: none;
+  stroke: var(--astro-color-text);
+  stroke-opacity: 0.1;
+}
+.astro-house-line {
+  stroke: var(--astro-color-text);
+  stroke-width: 0.8px;
+  opacity: 0.2;
+  stroke-dasharray: 3,3;
+}
+.astro-house-line.angle {
+  stroke-width: 1.5px;
+  opacity: 0.5;
+  stroke-dasharray: none;
+}
+.astro-house-label {
+  fill: var(--astro-color-text);
+  font-size: 8px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0.4;
+}
+.astro-angle-label {
+  fill: var(--astro-color-text);
+  font-size: 8px;
+  font-weight: bold;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0.8;
+  stroke: var(--astro-color-bg);
+  stroke-width: 3px;
+  paint-order: stroke fill;
+}
+.astro-angle-degree {
+  fill: var(--astro-color-text);
+  font-size: 7px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0.8;
+  stroke: var(--astro-color-bg);
+  stroke-width: 3px;
+  paint-order: stroke fill;
+}
+
+/* Planet Ring */
+.astro-planet-symbol {
+  font-size: 20px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: inherit; /* Inherit from group */
+  stroke: none;
+}
+.astro-planet-tick {
+  stroke-width: 0.8px;
+  stroke-opacity: 0.6;
+}
+.astro-planet-indicator {
+  font-size: 8px;
+  fill: inherit; /* Inherit from group */
+  stroke: none;
+}
+.astro-planet-degree {
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0.6;
+  stroke: none;
+}
+.astro-planet-zodiac {
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0.8;
+  stroke: none;
+}
+.astro-planet-minute {
+  font-size: 8px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0.5;
+  stroke: none;
+}
+
+/* Markers */
+.astro-marker {
+  stroke-width: 0.8px; 
+  stroke-opacity: 0.4;
+  stroke: var(--astro-color-text); /* Default fallback */
+}
+
+/* Aspect Lines */
+.astro-aspect-line {
+  stroke-width: 1px;
+  stroke-opacity: 0.6;
+  fill: none;
+}
+.astro-aspect-symbol {
+  font-size: 14px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  opacity: 1;
+}
+
+.astro-aspect-conj { stroke: var(--astro-color-aspect-conj); fill: var(--astro-color-aspect-conj); }
+.astro-aspect-opp { stroke: var(--astro-color-aspect-opp); fill: var(--astro-color-aspect-opp); }
+.astro-aspect-trine { stroke: var(--astro-color-aspect-trine); fill: var(--astro-color-aspect-trine); }
+.astro-aspect-square { stroke: var(--astro-color-aspect-square); fill: var(--astro-color-aspect-square); }
+.astro-aspect-sextile { stroke: var(--astro-color-aspect-sextile); fill: var(--astro-color-aspect-sextile); }
+.astro-aspect-minor { stroke: var(--astro-color-aspect-minor); fill: var(--astro-color-aspect-minor); }
+
+/* Semantic Planet Colors */
+.astro-planet-sun { fill: var(--astro-color-sun); stroke: var(--astro-color-sun); }
+.astro-planet-sun .astro-marker { stroke: var(--astro-color-sun); }
+
+.astro-planet-moon { fill: var(--astro-color-moon); stroke: var(--astro-color-moon); }
+.astro-planet-moon .astro-marker { stroke: var(--astro-color-moon); }
+
+.astro-planet-mercury { fill: var(--astro-color-mercury); stroke: var(--astro-color-mercury); }
+.astro-planet-mercury .astro-marker { stroke: var(--astro-color-mercury); }
+
+.astro-planet-venus { fill: var(--astro-color-venus); stroke: var(--astro-color-venus); }
+.astro-planet-venus .astro-marker { stroke: var(--astro-color-venus); }
+
+.astro-planet-mars { fill: var(--astro-color-mars); stroke: var(--astro-color-mars); }
+.astro-planet-mars .astro-marker { stroke: var(--astro-color-mars); }
+
+.astro-planet-jupiter { fill: var(--astro-color-jupiter); stroke: var(--astro-color-jupiter); }
+.astro-planet-jupiter .astro-marker { stroke: var(--astro-color-jupiter); }
+
+.astro-planet-saturn { fill: var(--astro-color-saturn); stroke: var(--astro-color-saturn); }
+.astro-planet-saturn .astro-marker { stroke: var(--astro-color-saturn); }
+
+.astro-planet-uranus { fill: var(--astro-color-uranus); stroke: var(--astro-color-uranus); }
+.astro-planet-uranus .astro-marker { stroke: var(--astro-color-uranus); }
+
+.astro-planet-neptune { fill: var(--astro-color-neptune); stroke: var(--astro-color-neptune); }
+.astro-planet-neptune .astro-marker { stroke: var(--astro-color-neptune); }
+
+.astro-planet-pluto { fill: var(--astro-color-pluto); stroke: var(--astro-color-pluto); }
+.astro-planet-pluto .astro-marker { stroke: var(--astro-color-pluto); }
+
+.astro-planet-chiron { fill: var(--astro-color-chiron); stroke: var(--astro-color-chiron); }
+.astro-planet-chiron .astro-marker { stroke: var(--astro-color-chiron); }
+
+.astro-planet-mean-node { fill: var(--astro-color-mean-node); stroke: var(--astro-color-mean-node); }
+.astro-planet-mean-node .astro-marker { stroke: var(--astro-color-mean-node); }
+
+.astro-planet-true-node { fill: var(--astro-color-true-node); stroke: var(--astro-color-true-node); }
+.astro-planet-true-node .astro-marker { stroke: var(--astro-color-true-node); }
+
+.astro-planet-lilith-mean { fill: var(--astro-color-mean-lilith); stroke: var(--astro-color-mean-lilith); }
+.astro-planet-lilith-mean .astro-marker { stroke: var(--astro-color-mean-lilith); }
+
+.astro-planet-lilith-true { fill: var(--astro-color-mean-lilith); stroke: var(--astro-color-mean-lilith); }
+.astro-planet-lilith-true .astro-marker { stroke: var(--astro-color-mean-lilith); }
+
+.astro-planet-vertex { fill: var(--astro-color-vertex); stroke: var(--astro-color-vertex); }
+.astro-planet-vertex .astro-marker { stroke: var(--astro-color-vertex); }
+
+.astro-planet-anti-vertex { fill: var(--astro-color-anti-vertex); stroke: var(--astro-color-anti-vertex); }
+.astro-planet-anti-vertex .astro-marker { stroke: var(--astro-color-anti-vertex); }
+
+.astro-planet-pars-fortunae { fill: var(--astro-color-pars-fortunae); stroke: var(--astro-color-pars-fortunae); }
+.astro-planet-pars-fortunae .astro-marker { stroke: var(--astro-color-pars-fortunae); }
