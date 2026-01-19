@@ -35,7 +35,7 @@ export const NatalChart: React.FC<NatalChartProps> = ({
       className={className}
     >
       {/* Background */}
-      <circle cx={cx} cy={cy} r={radius} fill="var(--astro-color-paper)" />
+      <circle cx={cx} cy={cy} r={radius} fill="var(--astro-color-paper)" stroke="none" />
       
       {/* Outer Zodiac */}
       <ZodiacWheel showSignBackgrounds={true} />
@@ -44,7 +44,7 @@ export const NatalChart: React.FC<NatalChartProps> = ({
       <HouseLines />
       
       {/* Inner Decorative Ring */}
-      <circle cx={cx} cy={cy} r={radius * 0.4} stroke="var(--astro-color-text)" strokeOpacity={0.1} fill="none" />
+      <circle cx={cx} cy={cy} r={radius * 0.4} stroke="var(--astro-color-text)" fill="none" />
       
       {/* Planet Positions */}
       <PlanetRing 

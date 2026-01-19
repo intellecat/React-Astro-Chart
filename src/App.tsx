@@ -9,16 +9,16 @@ import {
 import { SwissEphemeris } from '@swisseph/browser';
 // @ts-ignore
 import wasmUrl from '@swisseph/browser/dist/swisseph.wasm?url';
-import { NatalChart, TransitChart, SynastryChart } from './index';
+import { NatalChart, TransitChart, SynastryChart, ClassicChart } from './index';
 
-type ChartType = 'natal' | 'transit' | 'synastry';
+type ChartType = 'natal' | 'transit' | 'synastry' | 'classic';
 
 function App() {
   const [chartData, setChartData] = useState<ChartData | null>(null);
   const [transitData, setTransitData] = useState<ChartData | null>(null);
   const [partnerData, setPartnerData] = useState<ChartData | null>(null);
   const [view, setView] = useState<ChartType>('natal');
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark' | 'classic'>('light');
   const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -91,6 +91,12 @@ function App() {
     return <div style={{ padding: '20px' }}>Initializing Astronomy Engine...</div>;
   }
 
+  const toggleTheme = () => {
+    if (theme === 'light') setTheme('dark');
+    else if (theme === 'dark') setTheme('classic');
+    else setTheme('light');
+  };
+
   return (
     <div 
       className="app-container" 
@@ -109,12 +115,14 @@ function App() {
     >
       <h1>AstroCore React Demo</h1>
       
-      <div style={{ marginBottom: '20px', display: 'flex', gap: '10px' }}>
-        <button onClick={() => setView('natal')} disabled={view === 'natal'}>Natal Chart</button>
-        <button onClick={() => setView('transit')} disabled={view === 'transit'}>Transit Chart</button>
-        <button onClick={() => setView('synastry')} disabled={view === 'synastry'}>Synastry Chart</button>
-        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-          Switch to {theme === 'light' ? 'Dark' : 'Light'} Theme
+      <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <button onClick={() => setView('natal')} disabled={view === 'natal'}>Natal</button>
+        <button onClick={() => setView('transit')} disabled={view === 'transit'}>Transit</button>
+        <button onClick={() => setView('synastry')} disabled={view === 'synastry'}>Synastry</button>
+        <button onClick={() => { setView('classic'); setTheme('classic'); }} disabled={view === 'classic'}>Classic (Astrodienst)</button>
+        <div style={{ width: '10px' }}></div>
+        <button onClick={toggleTheme}>
+          Theme: {theme.charAt(0).toUpperCase() + theme.slice(1)}
         </button>
       </div>
 
@@ -146,6 +154,16 @@ function App() {
           width={700} 
           height={700}
           className="my-chart"
+        />
+      )}
+
+      {view === 'classic' && (
+        <ClassicChart 
+          data={chartData} 
+          width={650} 
+          height={650}
+          className="my-chart"
+          onPlanetClick={(id) => setSelectedPlanet(`Classic ${id}`)}
         />
       )}
 

@@ -45,9 +45,9 @@ export const HouseLines: React.FC<HouseLinesProps> = ({
         let angleLabel = null;
         if (showLabels && isAngle) {
             let label = '';
-            if (house.house === 1) label = 'ASC';
+            if (house.house === 1) label = 'AC';
             else if (house.house === 4) label = 'IC';
-            else if (house.house === 7) label = 'DSC';
+            else if (house.house === 7) label = 'DC';
             else if (house.house === 10) label = 'MC';
 
             const pos = polarToCartesian(cx, cy, angleR, house.longitude, rotationOffset);

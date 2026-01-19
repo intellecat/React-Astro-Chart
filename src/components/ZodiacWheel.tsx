@@ -59,7 +59,7 @@ export const ZodiacWheel: React.FC<ZodiacWheelProps> = ({
             <text
               x={glyphPos.x}
               y={glyphPos.y}
-              className="astro-zodiac-glyph"
+              className={`astro-zodiac-glyph ${sign.element.toLowerCase()}`}
             >
               {sign.emoji}
             </text>

@@ -8,5 +8,7 @@ export * from './components/DegreeRings';
 export * from './charts/NatalChart';
 export * from './charts/TransitChart';
 export * from './charts/SynastryChart';
+export * from './charts/ClassicChart';
 import './styles/astro.css';
 import './styles/astro-theme-dark.css';
+import './styles/astro-theme-classic.css';

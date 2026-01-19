@@ -1,0 +1,117 @@
+[data-theme="classic"] {
+  /* Backgrounds */
+  --astro-color-bg: #ffffff;
+  --astro-color-paper: #ffffff;
+  --astro-color-text: #000000;
+
+  /* Classic Specific Backgrounds */
+  --astro-color-classic-yellow: #FFFFF1; /* Light Yellow */
+  --astro-color-classic-skyblue: #f3feff;   /* sky blue */
+  --astro-color-classic-blue: #e1fefe;   /* blue */
+
+  /* Planets - Classic Black Glyphs */
+  --astro-color-sun: #000000;
+  --astro-color-moon: #000000;
+  --astro-color-mercury: #000000;
+  --astro-color-venus: #000000;
+  --astro-color-mars: #000000;
+  --astro-color-jupiter: #000000;
+  --astro-color-saturn: #000000;
+  --astro-color-uranus: #000000;
+  --astro-color-neptune: #000000;
+  --astro-color-pluto: #000000;
+  --astro-color-mean-node: #000000;
+  --astro-color-true-node: #000000;
+
+  /* Aspects - High Contrast */
+  --astro-color-aspect-conj: #FFD700;
+  --astro-color-aspect-opp: #FF0000;
+  --astro-color-aspect-trine: #0000FF;
+  --astro-color-aspect-square: #FF0000;
+  --astro-color-aspect-sextile: #0000FF;
+  --astro-color-aspect-minor: #008000;
+
+  /* Zodiac - Subtle or Element based */
+  --astro-color-fire: #FF4500;
+  --astro-color-earth: #228B22;
+  --astro-color-air: #FFD700; /* Often yellow/orange in some classic charts */
+  --astro-color-water: #1E90FF;
+}
+
+/* Specific Overrides for Classic Theme */
+[data-theme="classic"] .astro-zodiac-ring {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 1px;
+  stroke-opacity: 1;
+}
+
+[data-theme="classic"] .astro-zodiac-glyph {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+[data-theme="classic"] .astro-zodiac-glyph.fire { fill: var(--astro-color-fire); }
+[data-theme="classic"] .astro-zodiac-glyph.earth { fill: var(--astro-color-earth); }
+[data-theme="classic"] .astro-zodiac-glyph.air { fill: var(--astro-color-air); }
+[data-theme="classic"] .astro-zodiac-glyph.water { fill: var(--astro-color-water); }
+
+[data-theme="classic"] .astro-house-line {
+  stroke: #000000;
+  opacity: 0.7;
+  stroke-dasharray: none; /* Solid lines */
+
+}
+
+[data-theme="classic"] .astro-house-line.angle {
+  stroke: #000000;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+[data-theme="classic"] .astro-planet-symbol {
+  font-family: serif; 
+  fill: #000000;
+  font-size: 25px;
+}
+
+[data-theme="classic"] .astro-planet-degree {
+  font-size: 13px;
+  font-family: sans-serif;
+}
+
+[data-theme="classic"] .astro-marker {
+  stroke: #000000;
+  stroke-width: 1px;
+  stroke-opacity: 0.6;
+}
+
+[data-theme="classic"] .astro-aspect-line {
+  stroke-width: 1.2px;
+  stroke-opacity: 0.6;
+}
+
+[data-theme="classic"] .astro-house-label {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+[data-theme="classic"] .astro-angle-label {
+  font-size: 12px;
+}
+[data-theme="classic"] .astro-angle-degree {
+  font-size: 10px;
+}
+
+[data-theme="classic"] .astro-zodiac-line {
+  stroke: var(--astro-color-text);
+  stroke-opacity: 0.8;
+}
+
+/* Aspect Colors */
+[data-theme="classic"] .astro-aspect-conj { stroke: #FFD700; } 
+[data-theme="classic"] .astro-aspect-opp { stroke: #0000FF; } 
+[data-theme="classic"] .astro-aspect-trine { stroke: #0000FF; } 
+[data-theme="classic"] .astro-aspect-square { stroke: #FF0000; } 
+[data-theme="classic"] .astro-aspect-sextile { stroke: #0000FF; stroke-dasharray: 2,2; } 
+[data-theme="classic"] .astro-aspect-minor { stroke: #008000; stroke-dasharray: 1,2; }
