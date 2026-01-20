@@ -62,8 +62,8 @@ export const TransitChart: React.FC<TransitChartProps> = ({
         angleLabelRadius={innerRadius * 0.52}
       />
 
-      {/* Inner Decorative */}
-      <circle cx={cx} cy={cy} r={innerRadius * 0.45} stroke="var(--astro-color-text)" strokeOpacity={0.1} fill="none" />
+      {/* Inner Ring */}
+      <circle className="astro-inner-ring" cx={cx} cy={cy} r={innerRadius * 0.45} fill="none" />
 
       {/* Natal Planets */}
       <PlanetRing 
@@ -75,9 +75,6 @@ export const TransitChart: React.FC<TransitChartProps> = ({
       />
 
       {/* --- Outer Transit Ring --- */}
-      
-      {/* Boundary */}
-      <circle cx={cx} cy={cy} r={innerRadius} stroke="var(--astro-color-text)" strokeOpacity={0.2} fill="none" />
 
       {/* Transit Planets */}
       <PlanetRing 

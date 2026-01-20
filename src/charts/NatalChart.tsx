@@ -43,8 +43,8 @@ export const NatalChart: React.FC<NatalChartProps> = ({
       {/* House Cusp Lines */}
       <HouseLines />
       
-      {/* Inner Decorative Ring */}
-      <circle cx={cx} cy={cy} r={radius * 0.4} stroke="var(--astro-color-text)" fill="none" />
+      {/* Inner  Ring */}
+      <circle className="astro-inner-ring" cx={cx} cy={cy} r={radius * 0.4} fill="none" />
       
       {/* Planet Positions */}
       <PlanetRing 

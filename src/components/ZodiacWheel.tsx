@@ -37,8 +37,8 @@ export const ZodiacWheel: React.FC<ZodiacWheelProps> = ({
       ))}
 
       {/* 2. Boundary Rings */}
-      <circle cx={cx} cy={cy} r={outR} className="astro-zodiac-ring" />
-      <circle cx={cx} cy={cy} r={inR} className="astro-zodiac-ring" />
+      <circle cx={cx} cy={cy} r={outR} className="astro-zodiac-ring astro-zodiac-ring-outer" />
+      <circle cx={cx} cy={cy} r={inR} className="astro-zodiac-ring astro-zodiac-ring-inner" />
 
       {/* 3. Signs and Dividers */}
       {ZODIAC_SIGNS.map((sign, i) => {
