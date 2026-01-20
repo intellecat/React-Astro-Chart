@@ -22,29 +22,31 @@ export const ModernChart: React.FC<ModernChartProps> = ({
   className,
   onPlanetClick
 }) => {
-  const mainRadius = Math.min(width, height) / 2;
+  // --- Coordinate System Definitions ---
+  // We use a fixed internal grid (viewBoxSize) so geometry calculations are stable.
+  // The SVG viewBox in AstroChart will handle scaling to the actual rendered width/height.
+  const viewBoxSize = 600;
+  const center = viewBoxSize / 2;
+  const mainRadius = viewBoxSize / 2;
 
-  // Geometry
+  // Geometry (Absolute values relative to the internal 600px grid)
   const zodiacThickness = 40; 
   const zodiacOuter = mainRadius - 10;
   const zodiacInner = zodiacOuter - zodiacThickness;
   
   const gap = 7;
-  // Define a white band where planets and house dividers live
   const whiteBandThickness = 30;
   const whiteBandInner = zodiacInner - gap - whiteBandThickness;
   
-  // Planets centered in the white band
-  const planetR = whiteBandInner + (whiteBandThickness / 2)-3;
-  
-  // Aspects
-  const aspectRadius = whiteBandInner - gap -5;
+  const planetR = whiteBandInner + (whiteBandThickness / 2) - 3;
+  const aspectRadius = whiteBandInner - gap - 5;
 
   return (
     <AstroChart 
       data={data} 
       width={width} 
       height={height}
+      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
       className={className}
     >
       {/* 1. Zodiac Ring (Black Band with Text) */}
@@ -55,25 +57,25 @@ export const ModernChart: React.FC<ModernChartProps> = ({
       
       {/* 1b. Thin inner border for zodiac ring */}
       <circle 
-        cx={width/2} cy={height/2} r={zodiacInner} 
+        cx={center} cy={center} r={zodiacInner} 
         fill="#eee" stroke="none" 
       />
 
       {/* 1c. White inner border for zodiac ring */}
       <circle 
-        cx={width/2} cy={height/2} r={zodiacInner-gap} 
+        cx={center} cy={center} r={zodiacInner-gap} 
         fill="#fff" stroke="var(--astro-color-text)" strokeWidth="0.2" 
       />
 
-<circle 
-        cx={width/2} cy={height/2} r={aspectRadius+5} 
+      <circle 
+        cx={center} cy={center} r={aspectRadius + 5} 
         fill="#eee" stroke="var(--astro-color-text)" strokeWidth="0.2" 
       />
 
       {/* 2. House Lines (Restricted to white band) */}
       <HouseLines 
         radius={aspectRadius}
-        endRadius={zodiacInner-gap+2}
+        endRadius={zodiacInner - gap + 2}
         showLabels={false} 
       />
 
@@ -98,8 +100,8 @@ export const ModernChart: React.FC<ModernChartProps> = ({
 
       {/* 5. Ascendant Arrow (Fixed at Left) */}
       <text 
-        x={(width/2) - (zodiacInner - gap - 10)} 
-        y={(height/2) + 10} 
+        x={center - (zodiacInner - gap - 10)} 
+        y={center + 10} 
         className="astro-asc-arrow"
         style={{ 
           fontSize: '24px', 

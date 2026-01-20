@@ -25,8 +25,9 @@ export const useChart = () => {
 interface AstroChartProps {
   data: ChartData;
   secondaryData?: ChartData;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
+  viewBox?: string;
   children: React.ReactNode;
   className?: string;
 }
@@ -36,32 +37,44 @@ export const AstroChart: React.FC<AstroChartProps> = ({
   secondaryData,
   width = 600,
   height = 600,
+  viewBox,
   children,
   className
 }) => {
-  const cx = width / 2;
-  const cy = height / 2;
-  const radius = Math.min(width, height) * 0.5;
+  // Parse coordinate system from viewBox or fallback to physical size
+  let vw = typeof width === 'number' ? width : 600;
+  let vh = typeof height === 'number' ? height : 600;
+  
+  if (viewBox) {
+    const parts = viewBox.split(/\s+/).map(Number);
+    if (parts.length === 4) {
+      vw = parts[2];
+      vh = parts[3];
+    }
+  }
+
+  const cx = vw / 2;
+  const cy = vh / 2;
+  const radius = Math.min(vw, vh) * 0.5;
 
   // Rotation offset to put Ascendant on the left (180 deg)
-  // Logic mirrored from geometry.ts: getAscendantOffset
   const rotationOffset = 180 - data.angles.Asc;
 
   const value = useMemo(() => ({
     data,
     secondaryData,
-    width,
-    height,
+    width: vw,
+    height: vh,
     cx,
     cy,
     radius,
     rotationOffset
-  }), [data, secondaryData, width, height, cx, cy, radius, rotationOffset]);
+  }), [data, secondaryData, vw, vh, cx, cy, radius, rotationOffset]);
 
   return (
     <ChartContext.Provider value={value}>
       <svg
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={viewBox || `0 0 ${width} ${height}`}
         width={width}
         height={height}
         className={className}
