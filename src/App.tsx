@@ -9,16 +9,16 @@ import {
 import { SwissEphemeris } from '@swisseph/browser';
 // @ts-ignore
 import wasmUrl from '@swisseph/browser/dist/swisseph.wasm?url';
-import { NatalChart, TransitChart, SynastryChart, ClassicChart } from './index';
+import { NatalChart, TransitChart, SynastryChart, ClassicChart, ModernChart } from './index';
 
-type ChartType = 'natal' | 'transit' | 'synastry' | 'classic';
+type ChartType = 'natal' | 'transit' | 'synastry' | 'classic' | 'modern';
 
 function App() {
   const [chartData, setChartData] = useState<ChartData | null>(null);
   const [transitData, setTransitData] = useState<ChartData | null>(null);
   const [partnerData, setPartnerData] = useState<ChartData | null>(null);
   const [view, setView] = useState<ChartType>('natal');
-  const [theme, setTheme] = useState<'light' | 'dark' | 'classic'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark' | 'classic' | 'modern'>('light');
   const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -94,6 +94,7 @@ function App() {
   const toggleTheme = () => {
     if (theme === 'light') setTheme('dark');
     else if (theme === 'dark') setTheme('classic');
+    else if (theme === 'classic') setTheme('modern');
     else setTheme('light');
   };
 
@@ -120,6 +121,7 @@ function App() {
         <button onClick={() => setView('transit')} disabled={view === 'transit'}>Transit</button>
         <button onClick={() => setView('synastry')} disabled={view === 'synastry'}>Synastry</button>
         <button onClick={() => { setView('classic'); setTheme('classic'); }} disabled={view === 'classic'}>Classic (Astrodienst)</button>
+        <button onClick={() => { setView('modern'); setTheme('modern'); }} disabled={view === 'modern'}>Modern (Co-Star)</button>
         <div style={{ width: '10px' }}></div>
         <button onClick={toggleTheme}>
           Theme: {theme.charAt(0).toUpperCase() + theme.slice(1)}
@@ -164,6 +166,16 @@ function App() {
           height={650}
           className="my-chart"
           onPlanetClick={(id) => setSelectedPlanet(`Classic ${id}`)}
+        />
+      )}
+
+      {view === 'modern' && (
+        <ModernChart 
+          data={chartData} 
+          width={650} 
+          height={650}
+          className="my-chart"
+          onPlanetClick={(id) => setSelectedPlanet(`Modern ${id}`)}
         />
       )}
 

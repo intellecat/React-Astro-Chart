@@ -1,0 +1,103 @@
+[data-theme="modern"] {
+  /* Backgrounds */
+  --astro-color-bg: #ffffff;
+  --astro-color-paper: #ffffff;
+  --astro-color-text: #000000;
+
+  /* Planets - All Black */
+  --astro-color-sun: #000000;
+  --astro-color-moon: #000000;
+  --astro-color-mercury: #000000;
+  --astro-color-venus: #000000;
+  --astro-color-mars: #000000;
+  --astro-color-jupiter: #000000;
+  --astro-color-saturn: #000000;
+  --astro-color-uranus: #000000;
+  --astro-color-neptune: #000000;
+  --astro-color-pluto: #000000;
+  --astro-color-mean-node: #000000;
+  --astro-color-true-node: #000000;
+
+  /* Aspects - Grayscale Lines */
+  --astro-color-aspect-conj: #333333;
+  --astro-color-aspect-opp: #333333;
+  --astro-color-aspect-trine: #999999;
+  --astro-color-aspect-square: #666666;
+  --astro-color-aspect-sextile: #cccccc;
+  --astro-color-aspect-minor: #cccccc;
+}
+
+/* Specific Overrides for Modern Theme */
+[data-theme="modern"] .astro-zodiac-ring {
+  fill: #000000; /* Black Ring */
+  stroke: none;
+}
+
+/* Zodiac Text Labels (White on Black) */
+[data-theme="modern"] .astro-zodiac-label {
+  fill: #ffffff;
+  font-family: sans-serif;
+  font-size: 14px; 
+  text-transform: uppercase;
+  letter-spacing: 0.5px; 
+}
+
+/* House Lines - Faint */
+[data-theme="modern"] .astro-house-line {
+  stroke: #cccccc;
+  stroke-width: 0.5px;
+  stroke-dasharray: none;
+}
+
+[data-theme="modern"] .astro-house-line.angle {
+  stroke: #999999;
+  stroke-width: 1px;
+}
+
+/* Hide house numbers usually */
+[data-theme="modern"] .astro-house-label {
+  display: none;
+}
+
+[data-theme="modern"] .astro-house-ring {
+  display: none;
+}
+
+/* Planets - Minimal */
+[data-theme="modern"] .astro-planet-symbol {
+  font-family: serif; 
+  fill: #000000;
+  font-weight: normal;
+  font-size: 30px;
+}
+
+[data-theme="modern"] .astro-planet-degree,
+[data-theme="modern"] .astro-planet-minute,
+[data-theme="modern"] .astro-planet-zodiac {
+  display: none; /* Hide data text */
+}
+
+/* Markers - Dotted lines */
+[data-theme="modern"] .astro-marker {
+  stroke: #000;
+  stroke-width: 0.8px;
+  stroke-linecap: round;
+}
+
+/* Aspects - Thin, styled lines */
+[data-theme="modern"] .astro-aspect-line {
+  stroke-width: 0.5px;
+  opacity: 1;
+}
+
+[data-theme="modern"] .astro-aspect-tick {
+  stroke: #999999;
+  stroke-width: 1px;
+}
+
+/* Specific line styles for aspects in monochrome */
+[data-theme="modern"] .astro-aspect-conj { stroke-dasharray: none; }
+[data-theme="modern"] .astro-aspect-opp { stroke-dasharray: 4,2; }
+[data-theme="modern"] .astro-aspect-trine { stroke-dasharray: 6,3; }
+[data-theme="modern"] .astro-aspect-square { stroke-dasharray: 8,2; }
+[data-theme="modern"] .astro-aspect-sextile { stroke-dasharray: 1,5; }

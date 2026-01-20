@@ -9,6 +9,8 @@ export * from './charts/NatalChart';
 export * from './charts/TransitChart';
 export * from './charts/SynastryChart';
 export * from './charts/ClassicChart';
+export * from './charts/ModernChart';
 import './styles/astro.css';
 import './styles/astro-theme-dark.css';
 import './styles/astro-theme-classic.css';
+import './styles/astro-theme-modern.css';
