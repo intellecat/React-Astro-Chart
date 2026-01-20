@@ -7,7 +7,6 @@ export interface TextZodiacWheelProps {
   outerRadius: number;
   innerRadius: number;
   className?: string;
-  fontSize?: number;
 }
 
 // Helper to describe a simple arc path (stroke)
@@ -33,15 +32,14 @@ function describeArcStroke(cx: number, cy: number, r: number, startAngle: number
 export const TextZodiacWheel: React.FC<TextZodiacWheelProps> = ({
   outerRadius,
   innerRadius,
-  className,
-  fontSize
+  className
 }) => {
   const { cx, cy, rotationOffset } = useChart();
   const textRadius = (outerRadius + innerRadius) / 2;
   const baseId = useId();
 
   return (
-    <g className={`astro-text-zodiac-wheel ${className || ''}`} style={fontSize ? { fontSize: `${fontSize}px` } : undefined}>
+    <g className={`astro-text-zodiac-wheel ${className || ''}`}>
       {/* 1. Black Background Ring */}
       <path
         d={describeRingSector(cx, cy, innerRadius, outerRadius, 0, 359.99, 0)}
@@ -54,19 +52,11 @@ export const TextZodiacWheel: React.FC<TextZodiacWheelProps> = ({
         const endAngle = (i + 1) * 30;
         const midAngle = startAngle + 15;
         
-        // Calculate visual angle on screen
         const screenAngle = normalizeAngle(midAngle + rotationOffset);
-        
-        // Determine direction based on visual quadrants to match Co-Star style.
-        // CW (reverse=true): Top, Top-Left, Top-Right, Right.
-        // CCW (reverse=false): Left, Bottom-Left, Bottom, Bottom-Right.
-        // Switch points determined empirically: ~165 deg and ~345 deg.
         const isCCW = screenAngle >= 165 && screenAngle < 345;
         const reverse = !isCCW;
 
         const pathId = `${baseId}-path-${i}`;
-        
-        // Path adjusted for rotation
         const arcPath = describeArcStroke(
             cx, cy, textRadius, 
             startAngle + rotationOffset, 
@@ -74,7 +64,6 @@ export const TextZodiacWheel: React.FC<TextZodiacWheelProps> = ({
             reverse
         );
         
-        // Separator Line
         const sepP1 = polarToCartesian(cx, cy, outerRadius, startAngle, rotationOffset);
         const sepP2 = polarToCartesian(cx, cy, innerRadius, startAngle, rotationOffset);
 
@@ -84,7 +73,6 @@ export const TextZodiacWheel: React.FC<TextZodiacWheelProps> = ({
                  <path id={pathId} d={arcPath} />
              </defs>
           
-            {/* White Separator */}
             <line
               x1={sepP1.x} y1={sepP1.y}
               x2={sepP2.x} y2={sepP2.y}
@@ -92,7 +80,6 @@ export const TextZodiacWheel: React.FC<TextZodiacWheelProps> = ({
               strokeWidth="1"
             />
             
-            {/* Curved Text Label */}
             <text className="astro-zodiac-label" dy={1}>
                <textPath 
                  href={`#${pathId}`} 
