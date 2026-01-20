@@ -6,6 +6,7 @@ import { PlanetRing } from '../components/PlanetRing';
 import { HouseLines } from '../components/HouseLines';
 import { AspectLines } from '../components/AspectLines';
 import { DegreeRings } from '../components/DegreeRings';
+import { RadialMarker } from '../components/Markers';
 
 export interface ClassicChartProps {
   data: ChartData;
@@ -90,6 +91,7 @@ export const ClassicChart: React.FC<ClassicChartProps> = ({
         tickLength={15} // Long ticks pointing inward
         onPlanetClick={onPlanetClick}
         showMinutes={false}
+        renderMarker={RadialMarker}
       />
 
       {/* 5. Aspects */}

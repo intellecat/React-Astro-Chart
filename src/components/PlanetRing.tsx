@@ -4,6 +4,7 @@ import { resolveCollisions } from '../utils/collision';
 import { polarToCartesian } from '../utils/geometry';
 import { BodyId, ZODIAC_SIGNS } from '@astrologer/astro-core';
 import { clsx } from 'clsx';
+import { MarkerRenderer, LineMarker } from './Markers';
 
 const UNICODE_MAP: Record<string, string> = {
   [BodyId.Sun]: '☉', [BodyId.Moon]: '☽', [BodyId.Mercury]: '☿', [BodyId.Venus]: '♀', [BodyId.Mars]: '♂',
@@ -30,6 +31,7 @@ export interface PlanetRingProps {
   onPlanetClick?: (planetId: string) => void;
   dataSource?: 'primary' | 'secondary';
   includeBodies?: BodyId[];
+  renderMarker?: MarkerRenderer;
 }
 
 export const PlanetRing: React.FC<PlanetRingProps> = ({
@@ -43,7 +45,8 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
   className,
   onPlanetClick,
   dataSource = 'primary',
-  includeBodies
+  includeBodies,
+  renderMarker = LineMarker
 }) => {
   const { data, secondaryData, cx, cy, radius: mainRadius, rotationOffset } = useChart();
   const sourceData = dataSource === 'secondary' && secondaryData ? secondaryData : data;
@@ -80,13 +83,8 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
         const symPos = polarToCartesian(cx, cy, symR, adj.adjustedLongitude, rotationOffset);
         const tickStart = polarToCartesian(cx, cy, tickR, adj.originalLongitude, rotationOffset);
         
-        // Calculate tick vector (toward symbol)
-        // Vector: Sym - Tick
-        const dx = symPos.x - tickStart.x;
-        const dy = symPos.y - tickStart.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        const ratio = dist > 0 ? tickLength / dist : 0;
-        const tickEnd = { x: tickStart.x + dx * ratio, y: tickStart.y + dy * ratio };
+        // Marker element using renderer
+        const tick = renderMarker(tickStart, symPos, tickLength, { x: cx, y: cy });
 
         // Degree & Minute & Sign
         const degPos = polarToCartesian(cx, cy, degR, adj.adjustedLongitude, rotationOffset);
@@ -141,11 +139,7 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
             style={{ cursor: onPlanetClick ? 'pointer' : 'default' }}
           >
             {/* Tick */}
-            <line 
-                x1={tickStart.x} y1={tickStart.y} 
-                x2={tickEnd.x} y2={tickEnd.y} 
-                className="astro-marker" 
-            />
+            {tick}
             
             {/* Symbol */}
             <text x={symPos.x} y={symPos.y} className="astro-planet-symbol">

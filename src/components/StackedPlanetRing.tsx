@@ -4,6 +4,7 @@ import { resolveSynastryCollisions } from '../utils/collision_synastry';
 import { polarToCartesian } from '../utils/geometry';
 import { BodyId } from '@astrologer/astro-core';
 import { clsx } from 'clsx';
+import { MarkerRenderer, RadialMarker } from './Markers';
 
 const UNICODE_MAP: Record<string, string> = {
   [BodyId.Sun]: '☉', [BodyId.Moon]: '☽', [BodyId.Mercury]: '☿', [BodyId.Venus]: '♀', [BodyId.Mars]: '♂',
@@ -25,6 +26,7 @@ export interface StackedPlanetRingProps {
     includeBodies?: BodyId[];
     className?: string;
     dataSource?: 'primary' | 'secondary';
+    renderMarker?: MarkerRenderer;
 }
 
 export const StackedPlanetRing: React.FC<StackedPlanetRingProps> = ({
@@ -34,7 +36,8 @@ export const StackedPlanetRing: React.FC<StackedPlanetRingProps> = ({
   tickLength = 10,
   includeBodies,
   className,
-  dataSource = 'primary'
+  dataSource = 'primary',
+  renderMarker = RadialMarker
 }) => {
   const { data, secondaryData, cx, cy, rotationOffset } = useChart();
   
@@ -63,16 +66,13 @@ export const StackedPlanetRing: React.FC<StackedPlanetRingProps> = ({
         const symPos = polarToCartesian(cx, cy, r, adj.adjustedLongitude, rotationOffset);
         
         const markerStartPos = polarToCartesian(cx, cy, tickStartRadius, adj.originalLongitude, rotationOffset);
-        const markerEndPos = polarToCartesian(cx, cy, tickStartRadius - tickLength, adj.originalLongitude, rotationOffset);
+        
+        const tick = renderMarker(markerStartPos, symPos, tickLength, { x: cx, y: cy });
 
         return (
           <g key={planet.id} className={planetClass}>
             {/* Tick */}
-            <line 
-                x1={markerStartPos.x} y1={markerStartPos.y} 
-                x2={markerEndPos.x} y2={markerEndPos.y} 
-                className="astro-marker" 
-            />
+            {tick}
             
             {/* Symbol */}
             <text x={symPos.x} y={symPos.y} 
