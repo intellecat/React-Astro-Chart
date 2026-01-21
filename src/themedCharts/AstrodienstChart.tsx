@@ -1,4 +1,5 @@
 import React from 'react';
+import './AstrodienstTheme.css';
 import { ChartData } from '@astrologer/astro-core';
 import { AstroChart } from '../components/AstroChart';
 import { ZodiacWheel } from '../components/ZodiacWheel';

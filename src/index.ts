@@ -12,5 +12,3 @@ export * from './themedCharts/AstrodienstChart';
 export * from './themedCharts/CostarChart';
 import './styles/astro.css';
 import './styles/astro-theme-dark.css';
-import './styles/astro-theme-classic.css';
-import './styles/astro-theme-modern.css';

@@ -1,4 +1,5 @@
 import React from 'react';
+import './CostarTheme.css';
 import { ChartData } from '@astrologer/astro-core';
 import { AstroChart } from '../components/AstroChart';
 import { TextZodiacWheel } from '../components/TextZodiacWheel';
