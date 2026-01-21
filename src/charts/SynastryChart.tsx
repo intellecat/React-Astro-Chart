@@ -22,9 +22,12 @@ export const SynastryChart: React.FC<SynastryChartProps> = ({
   height = 700,
   className
 }) => {
-  const mainRadius = Math.min(width, height) / 2;
-  const cx = width / 2;
-  const cy = height / 2;
+  // Coordinate System
+  const viewBoxSize = 700;
+  const center = viewBoxSize / 2;
+  const cx = center;
+  const cy = center;
+  const mainRadius = viewBoxSize / 2;
   
   const zodiacInnerRadius = mainRadius - 40; 
   const bandThickness = 65; 
@@ -46,6 +49,7 @@ export const SynastryChart: React.FC<SynastryChartProps> = ({
       secondaryData={chartB}
       width={width} 
       height={height}
+      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
       className={className}
     >
       {/* Background */}

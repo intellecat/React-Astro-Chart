@@ -23,15 +23,19 @@ export const NatalChart: React.FC<NatalChartProps> = ({
   showAspects = true,
   onPlanetClick
 }) => {
-  const radius = Math.min(width, height) / 2;
-  const cx = width / 2;
-  const cy = height / 2;
+  // Coordinate System
+  const viewBoxSize = 600;
+  const center = viewBoxSize / 2;
+  const cx = center;
+  const cy = center;
+  const radius = viewBoxSize / 2;
 
   return (
     <AstroChart 
       data={data} 
       width={width} 
       height={height}
+      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
       className={className}
     >
       {/* Background */}

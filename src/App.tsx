@@ -20,6 +20,7 @@ function App() {
   const [view, setView] = useState<ChartType>('natal');
   const [theme, setTheme] = useState<'light' | 'dark' | 'classic' | 'modern'>('light');
   const [selectedPlanet, setSelectedPlanet] = useState<string | null>(null);
+  const [size, setSize] = useState(600);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -127,12 +128,25 @@ function App() {
           Theme: {theme.charAt(0).toUpperCase() + theme.slice(1)}
         </button>
       </div>
+      
+      <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <label>Size: {size}px</label>
+          <input 
+              type="range" 
+              min="300" 
+              max="1000" 
+              step="10" 
+              value={size} 
+              onChange={(e) => setSize(Number(e.target.value))} 
+              style={{ width: '300px' }}
+          />
+      </div>
 
       {view === 'natal' && (
         <NatalChart 
           data={chartData} 
-          width={600} 
-          height={600}
+          width={size} 
+          height={size}
           className="my-chart"
           onPlanetClick={(id) => setSelectedPlanet(`Natal ${id}`)}
         />
@@ -142,8 +156,8 @@ function App() {
         <TransitChart 
           natalData={chartData}
           transitData={transitData}
-          width={600} 
-          height={600}
+          width={size} 
+          height={size}
           className="my-chart"
           onPlanetClick={(id, source) => setSelectedPlanet(`${source === 'natal' ? 'Natal' : 'Transit'} ${id}`)}
         />
@@ -153,8 +167,8 @@ function App() {
         <SynastryChart 
           chartA={chartData}
           chartB={partnerData}
-          width={700} 
-          height={700}
+          width={size} 
+          height={size}
           className="my-chart"
         />
       )}
@@ -162,8 +176,8 @@ function App() {
       {view === 'classic' && (
         <ClassicChart 
           data={chartData} 
-          width={650} 
-          height={650}
+          width={size} 
+          height={size}
           className="my-chart"
           onPlanetClick={(id) => setSelectedPlanet(`Classic ${id}`)}
         />
@@ -172,8 +186,8 @@ function App() {
       {view === 'modern' && (
         <ModernChart 
           data={chartData} 
-          width={650} 
-          height={650}
+          width={size} 
+          height={size}
           className="my-chart"
           onPlanetClick={(id) => setSelectedPlanet(`Modern ${id}`)}
         />

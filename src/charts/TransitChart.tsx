@@ -24,9 +24,12 @@ export const TransitChart: React.FC<TransitChartProps> = ({
   className,
   onPlanetClick
 }) => {
-  const mainRadius = Math.min(width, height) / 2;
-  const cx = width / 2;
-  const cy = height / 2;
+  // Coordinate System
+  const viewBoxSize = 600;
+  const center = viewBoxSize / 2;
+  const cx = center;
+  const cy = center;
+  const mainRadius = viewBoxSize / 2;
   
   const transitBand = mainRadius * 0.15;
   const innerRadius = mainRadius - transitBand;
@@ -37,6 +40,7 @@ export const TransitChart: React.FC<TransitChartProps> = ({
       secondaryData={transitData}
       width={width} 
       height={height}
+      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
       className={className}
     >
       {/* Background */}

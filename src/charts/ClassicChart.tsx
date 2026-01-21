@@ -23,9 +23,12 @@ export const ClassicChart: React.FC<ClassicChartProps> = ({
   className,
   onPlanetClick
 }) => {
-  const mainRadius = Math.min(width, height) / 2;
-  const cx = width / 2;
-  const cy = height / 2;
+  // Coordinate System
+  const viewBoxSize = 600;
+  const center = viewBoxSize / 2;
+  const cx = center;
+  const cy = center;
+  const mainRadius = viewBoxSize / 2;
 
   // Geometry Definition for "Classic" Style
   const zodiacThickness = 40;
@@ -44,6 +47,7 @@ export const ClassicChart: React.FC<ClassicChartProps> = ({
       data={data} 
       width={width} 
       height={height}
+      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
       className={className}
     >
       {/* 0. Background Layers (The "Sandwich") */}
