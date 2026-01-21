@@ -7,7 +7,7 @@ import { HouseLines } from '../components/HouseLines';
 import { AspectLines } from '../components/AspectLines';
 import { RadialMarker } from '../components/Markers';
 
-export interface ModernChartProps {
+export interface CostarChartProps {
   data: ChartData;
   width?: number;
   height?: number;
@@ -15,7 +15,7 @@ export interface ModernChartProps {
   onPlanetClick?: (id: string) => void;
 }
 
-export const ModernChart: React.FC<ModernChartProps> = ({
+export const CostarChart: React.FC<CostarChartProps> = ({
   data,
   width = 600,
   height = 600,

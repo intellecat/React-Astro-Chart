@@ -9,9 +9,9 @@ import {
 import { SwissEphemeris } from '@swisseph/browser';
 // @ts-ignore
 import wasmUrl from '@swisseph/browser/dist/swisseph.wasm?url';
-import { NatalChart, TransitChart, SynastryChart, ClassicChart, ModernChart } from './index';
+import { NatalChart, TransitChart, SynastryChart, AstrodienstChart, CostarChart } from './index';
 
-type ChartType = 'natal' | 'transit' | 'synastry' | 'classic' | 'modern';
+type ChartType = 'natal' | 'transit' | 'synastry' | 'astrodienst' | 'costar';
 
 function App() {
   const [chartData, setChartData] = useState<ChartData | null>(null);
@@ -121,8 +121,8 @@ function App() {
         <button onClick={() => setView('natal')} disabled={view === 'natal'}>Natal</button>
         <button onClick={() => setView('transit')} disabled={view === 'transit'}>Transit</button>
         <button onClick={() => setView('synastry')} disabled={view === 'synastry'}>Synastry</button>
-        <button onClick={() => { setView('classic'); setTheme('classic'); }} disabled={view === 'classic'}>Classic (Astrodienst)</button>
-        <button onClick={() => { setView('modern'); setTheme('modern'); }} disabled={view === 'modern'}>Modern (Co-Star)</button>
+        <button onClick={() => { setView('astrodienst'); setTheme('classic'); }} disabled={view === 'astrodienst'}>Astrodienst (Classic)</button>
+        <button onClick={() => { setView('costar'); setTheme('modern'); }} disabled={view === 'costar'}>Co-Star (Modern)</button>
         <div style={{ width: '10px' }}></div>
         <button onClick={toggleTheme}>
           Theme: {theme.charAt(0).toUpperCase() + theme.slice(1)}
@@ -173,23 +173,23 @@ function App() {
         />
       )}
 
-      {view === 'classic' && (
-        <ClassicChart 
+      {view === 'astrodienst' && (
+        <AstrodienstChart 
           data={chartData} 
           width={size} 
           height={size}
           className="my-chart"
-          onPlanetClick={(id) => setSelectedPlanet(`Classic ${id}`)}
+          onPlanetClick={(id) => setSelectedPlanet(`Astrodienst ${id}`)}
         />
       )}
 
-      {view === 'modern' && (
-        <ModernChart 
+      {view === 'costar' && (
+        <CostarChart 
           data={chartData} 
           width={size} 
           height={size}
           className="my-chart"
-          onPlanetClick={(id) => setSelectedPlanet(`Modern ${id}`)}
+          onPlanetClick={(id) => setSelectedPlanet(`Co-Star ${id}`)}
         />
       )}
 

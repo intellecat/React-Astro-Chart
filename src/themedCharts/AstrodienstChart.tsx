@@ -8,7 +8,7 @@ import { AspectLines } from '../components/AspectLines';
 import { DegreeRings } from '../components/DegreeRings';
 import { RadialMarker } from '../components/Markers';
 
-export interface ClassicChartProps {
+export interface AstrodienstChartProps {
   data: ChartData;
   width?: number;
   height?: number;
@@ -16,7 +16,7 @@ export interface ClassicChartProps {
   onPlanetClick?: (id: string) => void;
 }
 
-export const ClassicChart: React.FC<ClassicChartProps> = ({
+export const AstrodienstChart: React.FC<AstrodienstChartProps> = ({
   data,
   width = 600,
   height = 600,
