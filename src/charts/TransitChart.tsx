@@ -72,7 +72,7 @@ export const TransitChart: React.FC<TransitChartProps> = ({
       {/* Natal Planets */}
       <PlanetRing 
         symbolRadius={innerRadius - 60}
-        degreeRadius={innerRadius - 75}
+        degreeRadius={innerRadius - 80}
         tickRadius={innerRadius - 35}
         tickLength={8}
         onPlanetClick={onPlanetClick ? (id) => onPlanetClick(id, 'natal') : undefined}

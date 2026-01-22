@@ -165,21 +165,21 @@ text {
   stroke: none;
 }
 .astro-planet-degree {
-  font-size: 10px;
+  font-size: 14px;
   text-anchor: middle;
   dominant-baseline: middle;
   opacity: 0.6;
   stroke: none;
 }
 .astro-planet-zodiac {
-  font-size: 10px;
+  font-size: 14px;
   text-anchor: middle;
   dominant-baseline: middle;
   opacity: 0.8;
   stroke: none;
 }
 .astro-planet-minute {
-  font-size: 8px;
+  font-size: 12px;
   text-anchor: middle;
   dominant-baseline: middle;
   opacity: 0.5;

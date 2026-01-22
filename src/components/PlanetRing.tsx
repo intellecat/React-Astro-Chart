@@ -96,7 +96,7 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
             const signData = ZODIAC_SIGNS.find(z => z.name === planet.sign);
             if (signData) {
                 // Heuristic: Place sign further in/out based on relative radii
-                const signR = degR > symR ? degR + 15 : degR - 15;
+                const signR = degR > symR ? degR + 18 : degR - 18;
                 minuteBaseR = signR;
                 const signPos = polarToCartesian(cx, cy, signR, adj.adjustedLongitude, rotationOffset);
                 signEl = (
@@ -111,7 +111,7 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
         let minuteEl = null;
         if (showMinutes) {
             const minVal = Math.floor((planet.degree % 1) * 60);
-            const minR = degR > symR ? minuteBaseR + 15 : minuteBaseR - 15;
+            const minR = degR > symR ? minuteBaseR + 18 : minuteBaseR - 18;
             const minPos = polarToCartesian(cx, cy, minR, adj.adjustedLongitude, rotationOffset);
             minuteEl = (
                 <text x={minPos.x} y={minPos.y} className="astro-planet-minute">
