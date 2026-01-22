@@ -26,6 +26,7 @@ export interface PlanetRingProps {
   tickLength?: number;
   showMinutes?: boolean;
   showZodiacSign?: boolean;
+  showRetrograde?: boolean;
   avoidHouses?: boolean;
   className?: string;
   onPlanetClick?: (planetId: string) => void;
@@ -41,6 +42,7 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
   tickLength = 10,
   showMinutes = false,
   showZodiacSign = false,
+  showRetrograde = true,
   avoidHouses = true,
   className,
   onPlanetClick,
@@ -131,6 +133,21 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
             );
         }
 
+        // Retrograde Indicator (r)
+        let retrogradeEl = null;
+        if (showRetrograde && planet.isRetrograde) {
+            retrogradeEl = (
+                <text 
+                  x={symPos.x + 6} 
+                  y={symPos.y + 2} 
+                  className="astro-planet-retrograde"
+                  style={{ fontSize: '0.6em', dominantBaseline: 'hanging' }}
+                >
+                    r
+                </text>
+            );
+        }
+
         return (
           <g 
             key={planet.id} 
@@ -146,6 +163,7 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
                 {char}
             </text>
             {indicatorEl}
+            {retrogradeEl}
 
             {/* Degree */}
             <text x={degPos.x} y={degPos.y} className="astro-planet-degree">
