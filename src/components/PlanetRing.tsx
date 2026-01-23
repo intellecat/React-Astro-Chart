@@ -5,14 +5,7 @@ import { polarToCartesian } from '../utils/geometry';
 import { BodyId, ZODIAC_SIGNS } from '@astrologer/astro-core';
 import { clsx } from 'clsx';
 import { MarkerRenderer, LineMarker } from './Markers';
-
-const UNICODE_MAP: Record<string, string> = {
-  [BodyId.Sun]: '☉', [BodyId.Moon]: '☽', [BodyId.Mercury]: '☿', [BodyId.Venus]: '♀', [BodyId.Mars]: '♂',
-  [BodyId.Jupiter]: '♃', [BodyId.Saturn]: '♄', [BodyId.Uranus]: '♅', [BodyId.Neptune]: '♆', [BodyId.Pluto]: '♇',
-  [BodyId.Chiron]: '⚷', [BodyId.MeanNode]: '☊', [BodyId.TrueNode]: '☊', [BodyId.SouthNode]: '☋',
-  [BodyId.LilithMean]: '⚸', [BodyId.LilithTrue]: '⚸', [BodyId.ParsFortunae]: '⊗',
-  [BodyId.Vertex]: 'Vx', [BodyId.AntiVertex]: 'Av',
-};
+import { PlanetSymbol } from './PlanetSymbol';
 
 function getBodyClass(id: string): string {
     return 'astro-planet-' + id.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
@@ -79,7 +72,6 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
     <g className={clsx("astro-planet-ring", className)}>
       {adjustedPlanets.map(adj => {
         const planet = sourceData.bodies.find(p => p.id === adj.id)!;
-        const char = UNICODE_MAP[planet.id] || '?';
         const planetClass = getBodyClass(planet.id);
 
         const symPos = polarToCartesian(cx, cy, symR, adj.adjustedLongitude, rotationOffset);
@@ -122,32 +114,6 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
             );
         }
 
-        // m/t indicators
-        let indicatorEl = null;
-        if (planet.id.includes('Mean') || planet.id.includes('True')) {
-            const ind = planet.id.includes('Mean') ? 'm' : 't';
-            indicatorEl = (
-                <text x={symPos.x + 8} y={symPos.y - 8} className="astro-planet-indicator">
-                    {ind}
-                </text>
-            );
-        }
-
-        // Retrograde Indicator (r)
-        let retrogradeEl = null;
-        if (showRetrograde && planet.isRetrograde) {
-            retrogradeEl = (
-                <text 
-                  x={symPos.x + 6} 
-                  y={symPos.y + 2} 
-                  className="astro-planet-retrograde"
-                  style={{ fontSize: '0.6em', dominantBaseline: 'hanging' }}
-                >
-                    r
-                </text>
-            );
-        }
-
         return (
           <g 
             key={planet.id} 
@@ -159,11 +125,12 @@ export const PlanetRing: React.FC<PlanetRingProps> = ({
             {tick}
             
             {/* Symbol */}
-            <text x={symPos.x} y={symPos.y} className="astro-planet-symbol">
-                {char}
-            </text>
-            {indicatorEl}
-            {retrogradeEl}
+            <PlanetSymbol 
+                planet={planet} 
+                x={symPos.x} 
+                y={symPos.y} 
+                showRetrograde={showRetrograde} 
+            />
 
             {/* Degree */}
             <text x={degPos.x} y={degPos.y} className="astro-planet-degree">

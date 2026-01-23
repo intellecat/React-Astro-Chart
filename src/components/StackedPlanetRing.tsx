@@ -5,14 +5,7 @@ import { polarToCartesian } from '../utils/geometry';
 import { BodyId } from '@astrologer/astro-core';
 import { clsx } from 'clsx';
 import { MarkerRenderer, RadialMarker } from './Markers';
-
-const UNICODE_MAP: Record<string, string> = {
-  [BodyId.Sun]: '☉', [BodyId.Moon]: '☽', [BodyId.Mercury]: '☿', [BodyId.Venus]: '♀', [BodyId.Mars]: '♂',
-  [BodyId.Jupiter]: '♃', [BodyId.Saturn]: '♄', [BodyId.Uranus]: '♅', [BodyId.Neptune]: '♆', [BodyId.Pluto]: '♇',
-  [BodyId.Chiron]: '⚷', [BodyId.MeanNode]: '☊', [BodyId.TrueNode]: '☊', [BodyId.SouthNode]: '☋',
-  [BodyId.LilithMean]: '⚸', [BodyId.LilithTrue]: '⚸', [BodyId.ParsFortunae]: '⊗',
-  [BodyId.Vertex]: 'Vx', [BodyId.AntiVertex]: 'Av',
-};
+import { PlanetSymbol } from './PlanetSymbol';
 
 function getBodyClass(id: string): string {
     return 'astro-planet-' + id.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
@@ -59,7 +52,6 @@ export const StackedPlanetRing: React.FC<StackedPlanetRingProps> = ({
     <g className={clsx("astro-stacked-planet-ring", className)}>
       {adjustedPlanets.map(adj => {
         const planet = planets.find(p => p.id === adj.id)!;
-        const char = UNICODE_MAP[planet.id] || '?';
         const planetClass = getBodyClass(planet.id);
 
         const r = symbolStartRadius - (adj.radialOffset * orbitStep);
@@ -75,18 +67,11 @@ export const StackedPlanetRing: React.FC<StackedPlanetRingProps> = ({
             {tick}
             
             {/* Symbol */}
-            <text x={symPos.x} y={symPos.y} 
-                  fontSize="18"
-                  className="astro-planet-symbol">
-                {char}
-            </text>
-            
-            {/* Indicator */}
-            {(planet.id.includes('Mean') || planet.id.includes('True')) && (
-                <text x={symPos.x + 7} y={symPos.y - 7} fontSize="7" className="astro-planet-indicator">
-                    {planet.id.includes('Mean') ? 'm' : 't'}
-                </text>
-            )}
+            <PlanetSymbol 
+                planet={planet} 
+                x={symPos.x} 
+                y={symPos.y} 
+            />
           </g>
         );
       })}
