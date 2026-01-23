@@ -45,7 +45,7 @@ export const NatalChart: React.FC<NatalChartProps> = ({
       <ZodiacWheel showSignBackgrounds={true} />
       
       {/* House Cusp Lines */}
-      <HouseLines />
+      <HouseLines degreeLabelRadius={radius * 0.53}/>
       
       {/* Inner  Ring */}
       <circle className="astro-inner-ring" cx={cx} cy={cy} r={radius * 0.4} fill="none" />

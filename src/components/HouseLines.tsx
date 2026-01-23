@@ -9,6 +9,7 @@ export interface HouseLinesProps {
   showLabels?: boolean;
   labelRadius?: number;
   angleLabelRadius?: number;
+  degreeLabelRadius?: number; // New prop for degree text
   className?: string;
   dataSource?: 'primary' | 'secondary';
 }
@@ -19,6 +20,7 @@ export const HouseLines: React.FC<HouseLinesProps> = ({
   showLabels = true,
   labelRadius,
   angleLabelRadius,
+  degreeLabelRadius,
   className,
   dataSource = 'primary'
 }) => {
@@ -29,6 +31,7 @@ export const HouseLines: React.FC<HouseLinesProps> = ({
   const endR = endRadius ?? mainRadius - 40;
   const textR = labelRadius ?? startR - 15;
   const angleR = angleLabelRadius ?? mainRadius * 0.45;
+  const angleDegreeR = degreeLabelRadius ?? angleR - 12;
 
   return (
     <g className={clsx("astro-house-lines", className)}>
@@ -51,7 +54,7 @@ export const HouseLines: React.FC<HouseLinesProps> = ({
             else if (house.house === 10) label = 'MC';
 
             const pos = polarToCartesian(cx, cy, angleR, house.longitude, rotationOffset);
-            const degPos = polarToCartesian(cx, cy, angleR - 12, house.longitude, rotationOffset);
+            const degPos = polarToCartesian(cx, cy, angleDegreeR, house.longitude, rotationOffset);
             
             angleLabel = (
                 <g>
