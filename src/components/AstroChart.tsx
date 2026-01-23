@@ -28,6 +28,7 @@ interface AstroChartProps {
   width?: number | string;
   height?: number | string;
   viewBox?: string;
+  rotationOffset?: number; // Optional override
   children: React.ReactNode;
   className?: string;
 }
@@ -38,6 +39,7 @@ export const AstroChart: React.FC<AstroChartProps> = ({
   width = 600,
   height = 600,
   viewBox,
+  rotationOffset: propRotationOffset,
   children,
   className
 }) => {
@@ -57,8 +59,8 @@ export const AstroChart: React.FC<AstroChartProps> = ({
   const cy = vh / 2;
   const radius = Math.min(vw, vh) * 0.5;
 
-  // Rotation offset to put Ascendant on the left (180 deg)
-  const rotationOffset = 180 - data.angles.Asc;
+  // Rotation offset: Use prop if provided, otherwise align Ascendant to left (180 deg)
+  const rotationOffset = propRotationOffset ?? (180 - data.angles.Asc);
 
   const value = useMemo(() => ({
     data,

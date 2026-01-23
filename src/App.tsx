@@ -9,9 +9,9 @@ import {
 import { SwissEphemeris } from '@swisseph/browser';
 // @ts-ignore
 import wasmUrl from '@swisseph/browser/dist/swisseph.wasm?url';
-import { NatalChart, TransitChart, SynastryChart, AstrodienstChart, CostarChart } from './index';
+import { NatalChart, NoonChart, TransitChart, SynastryChart, AstrodienstChart, CostarChart } from './index';
 
-type ChartType = 'natal' | 'transit' | 'synastry' | 'astrodienst' | 'costar';
+type ChartType = 'natal' | 'noon' | 'transit' | 'synastry' | 'astrodienst' | 'costar';
 
 function App() {
   const [chartData, setChartData] = useState<ChartData | null>(null);
@@ -119,6 +119,7 @@ function App() {
       
       <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button onClick={() => setView('natal')} disabled={view === 'natal'}>Natal</button>
+        <button onClick={() => setView('noon')} disabled={view === 'noon'}>Noon (Unknown Time)</button>
         <button onClick={() => setView('transit')} disabled={view === 'transit'}>Transit</button>
         <button onClick={() => setView('synastry')} disabled={view === 'synastry'}>Synastry</button>
         <button onClick={() => { setView('astrodienst'); setTheme('classic'); }} disabled={view === 'astrodienst'}>Astrodienst (Classic)</button>
@@ -149,6 +150,16 @@ function App() {
           height={size}
           className="my-chart"
           onPlanetClick={(id) => setSelectedPlanet(`Natal ${id}`)}
+        />
+      )}
+
+      {view === 'noon' && (
+        <NoonChart 
+          data={chartData} 
+          width={size} 
+          height={size}
+          className="my-chart"
+          onPlanetClick={(id) => setSelectedPlanet(`Noon ${id}`)}
         />
       )}
 

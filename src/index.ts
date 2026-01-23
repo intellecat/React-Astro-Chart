@@ -6,6 +6,7 @@ export * from './components/HouseLines';
 export * from './components/AspectLines';
 export * from './components/DegreeRings';
 export * from './charts/NatalChart';
+export * from './charts/NoonChart';
 export * from './charts/TransitChart';
 export * from './charts/SynastryChart';
 export * from './themedCharts/AstrodienstChart';
