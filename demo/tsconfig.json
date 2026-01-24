@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@astrologer/react-chart": ["../src/index.ts"]
+    }
+  },
+  "include": ["."]
+}
