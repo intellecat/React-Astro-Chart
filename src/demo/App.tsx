@@ -9,7 +9,7 @@ import {
 import { SwissEphemeris } from '@swisseph/browser';
 // @ts-ignore
 import wasmUrl from '@swisseph/browser/dist/swisseph.wasm?url';
-import { NatalChart, NoonChart, TransitChart, SynastryChart, AstrodienstChart, CostarChart } from './index';
+import { NatalChart, NoonChart, TransitChart, SynastryChart, AstrodienstChart, CostarChart } from '../index';
 
 type ChartType = 'natal' | 'noon' | 'transit' | 'synastry' | 'astrodienst' | 'costar';
 

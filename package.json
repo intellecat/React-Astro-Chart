@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite src/demo",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build:demo": "vite build src/demo"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
