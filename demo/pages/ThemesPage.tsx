@@ -1,15 +1,18 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { ChartData } from '@astrologer/astro-core';
 import { AstrodienstChart, CostarChart, NatalChart } from '@astrologer/react-chart';
 import { DemoViewer } from '../components/DemoViewer';
 
 interface Props {
-    view: string;
     data: ChartData;
     size: number;
 }
 
-export const ThemesPage: React.FC<Props> = ({ view, data, size }) => {
+export const ThemesPage: React.FC<Props> = ({ data, size }) => {
+    const { theme } = useParams<{ theme: string }>();
+    const view = theme || 'classic';
+
     const getCode = (type: string) => {
         switch(type) {
             case 'classic': return `<AstrodienstChart 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { GeoLocation } from '@astrologer/astro-core';
 import { useDemoData } from './hooks/useDemoData';
 import { Sidebar } from './layout/Sidebar';
@@ -9,69 +10,61 @@ import { ComponentsPage } from './pages/ComponentsPage';
 import './demo.css';
 
 function App() {
-  const [activePage, setActivePage] = useState('charts');
-  const [subPage, setSubPage] = useState('natal');
-  
   const [date, setDate] = useState(new Date('1988-06-18T09:00:00Z'));
   const [location, setLocation] = useState<GeoLocation>({ latitude: 33.0, longitude: 120.0 });
   const [size, setSize] = useState(600);
 
   const { isReady, natal, transit, partner } = useDemoData(date, location);
 
-  const handleNavigate = (page: string, sub: string) => {
-      setActivePage(page);
-      setSubPage(sub);
-  };
-
   if (!isReady || !natal || !transit || !partner) {
       return <div style={{ padding: 20 }}>Initializing Astro Engine...</div>;
   }
 
   return (
-    <div className="demo-layout">
-        <Header 
-            date={date} 
-            setDate={setDate} 
-            location={location} 
-            setLocation={setLocation} 
-            size={size} 
-            setSize={setSize} 
-        />
-        
-        <Sidebar 
-            activePage={activePage} 
-            subPage={subPage} 
-            onNavigate={handleNavigate} 
-        />
-        
-        <main className="demo-content">
-            {activePage === 'charts' && (
-                <ChartsPage 
-                    view={subPage as any} 
-                    data={natal} 
-                    transitData={transit} 
-                    partnerData={partner} 
-                    size={size} 
-                />
-            )}
+    <BrowserRouter>
+        <div className="demo-layout">
+            <Header 
+                date={date} 
+                setDate={setDate} 
+                location={location} 
+                setLocation={setLocation} 
+                size={size} 
+                setSize={setSize} 
+            />
             
-            {activePage === 'themes' && (
-                <ThemesPage 
-                    view={subPage as any} 
-                    data={natal} 
-                    size={size} 
-                />
-            )}
+            <Sidebar />
             
-            {activePage === 'components' && (
-                <ComponentsPage 
-                    view={subPage as any} 
-                    data={natal} 
-                    size={size} 
-                />
-            )}
-        </main>
-    </div>
+            <main className="demo-content">
+                <Routes>
+                    <Route path="/" element={<Navigate to="/charts/natal" replace />} />
+                    <Route path="/charts" element={<Navigate to="/charts/natal" replace />} />
+                    
+                    <Route path="/charts/:type" element={
+                        <ChartsPage 
+                            data={natal} 
+                            transitData={transit} 
+                            partnerData={partner} 
+                            size={size} 
+                        />
+                    } />
+                    
+                    <Route path="/themes/:theme" element={
+                        <ThemesPage 
+                            data={natal} 
+                            size={size} 
+                        />
+                    } />
+                    
+                    <Route path="/components/:component" element={
+                        <ComponentsPage 
+                            data={natal} 
+                            size={size} 
+                        />
+                    } />
+                </Routes>
+            </main>
+        </div>
+    </BrowserRouter>
   );
 }
 

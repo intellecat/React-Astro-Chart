@@ -1,17 +1,20 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { ChartData } from '@astrologer/astro-core';
 import { NatalChart, NoonChart, TransitChart, SynastryChart } from '@astrologer/react-chart';
 import { DemoViewer } from '../components/DemoViewer';
 
 interface Props {
-    view: string;
     data: ChartData;
     transitData: ChartData;
     partnerData: ChartData;
     size: number;
 }
 
-export const ChartsPage: React.FC<Props> = ({ view, data, transitData, partnerData, size }) => {
+export const ChartsPage: React.FC<Props> = ({ data, transitData, partnerData, size }) => {
+    const { type } = useParams<{ type: string }>();
+    const view = type || 'natal';
+
     const getCode = (type: string) => {
         switch(type) {
             case 'natal': return `<NatalChart 

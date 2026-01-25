@@ -1,10 +1,5 @@
 import React from 'react';
-
-interface Props {
-    activePage: string;
-    subPage: string;
-    onNavigate: (page: string, subPage: string) => void;
-}
+import { NavLink } from 'react-router-dom';
 
 const MENU = [
     {
@@ -40,20 +35,20 @@ const MENU = [
     }
 ];
 
-export const Sidebar: React.FC<Props> = ({ activePage, subPage, onNavigate }) => {
+export const Sidebar: React.FC = () => {
     return (
         <div className="demo-sidebar">
             {MENU.map(section => (
                 <div key={section.id}>
                     <div className="demo-section-title">{section.title}</div>
                     {section.items.map(item => (
-                        <a 
+                        <NavLink 
                             key={item.id}
-                            className={`demo-nav-item ${activePage === section.id && subPage === item.id ? 'active' : ''}`}
-                            onClick={() => onNavigate(section.id, item.id)}
+                            to={`/${section.id}/${item.id}`}
+                            className={({ isActive }) => `demo-nav-item ${isActive ? 'active' : ''}`}
                         >
                             {item.label}
-                        </a>
+                        </NavLink>
                     ))}
                 </div>
             ))}

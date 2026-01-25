@@ -1,15 +1,18 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { ChartData } from '@astrologer/astro-core';
 import { AstroChart, ZodiacWheel, AspectLines, PlanetRing, StackedPlanetRing, HouseLines, DegreeRings } from '@astrologer/react-chart';
 import { DemoViewer } from '../components/DemoViewer';
 
 interface Props {
-    view: string;
     data: ChartData;
     size: number;
 }
 
-export const ComponentsPage: React.FC<Props> = ({ view, data, size }) => {
+export const ComponentsPage: React.FC<Props> = ({ data, size }) => {
+    const { component } = useParams<{ component: string }>();
+    const view = component || 'zodiac';
+
     const getCode = (type: string) => {
         switch(type) {
             case 'zodiac': return `<AstroChart data={data} width={${size}} height={${size}}>
