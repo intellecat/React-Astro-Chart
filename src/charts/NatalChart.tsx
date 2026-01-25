@@ -13,6 +13,7 @@ export interface NatalChartProps {
   className?: string;
   showAspects?: boolean;
   onPlanetClick?: (id: string) => void;
+  rotationOffset?: number;
 }
 
 export const NatalChart: React.FC<NatalChartProps> = ({
@@ -21,7 +22,8 @@ export const NatalChart: React.FC<NatalChartProps> = ({
   height = 600,
   className,
   showAspects = true,
-  onPlanetClick
+  onPlanetClick,
+  rotationOffset
 }) => {
   // Coordinate System
   const viewBoxSize = 600;
@@ -37,6 +39,7 @@ export const NatalChart: React.FC<NatalChartProps> = ({
       height={height}
       viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
       className={className}
+      rotationOffset={rotationOffset}
     >
       {/* Background */}
       <circle cx={cx} cy={cy} r={radius} fill="var(--astro-color-paper)" stroke="none" />
