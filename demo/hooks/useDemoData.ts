@@ -38,15 +38,12 @@ export function useDemoData(date: Date, location: GeoLocation) {
     const bodies = [
         BodyId.Sun, BodyId.Moon, BodyId.Mercury, BodyId.Venus, BodyId.Mars,
         BodyId.Jupiter, BodyId.Saturn, BodyId.Uranus, BodyId.Neptune, BodyId.Pluto,
-        BodyId.MeanNode, BodyId.TrueNode, 
-        // BodyId.Chiron,
-        // BodyId.LilithMean, 
-        BodyId.Vertex, BodyId.ParsFortunae
+        BodyId.MeanNode, BodyId.TrueNode
     ];
 
     try {
         const natal = calculateChart({ date, location, bodies });
-        const transit = calculateChart({ date: new Date(), location, bodies });
+        const transit = calculateChart({ date, location, bodies });
         const partner = calculateChart({ 
             date: new Date(date.getTime() + 31557600000 * 2), // 2 years later
             location, 

@@ -46,7 +46,8 @@ function App() {
                             transitData={transit} 
                             partnerData={partner} 
                             size={size}
-                            location={location} 
+                            location={location}
+                            date={date}
                         />
                     } />
                     

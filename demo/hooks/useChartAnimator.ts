@@ -4,8 +4,7 @@ import { calculateChart, ChartData, GeoLocation, BodyId } from '@astrologer/astr
 export const DEFAULT_BODIES = [
     BodyId.Sun, BodyId.Moon, BodyId.Mercury, BodyId.Venus, BodyId.Mars,
     BodyId.Jupiter, BodyId.Saturn, BodyId.Uranus, BodyId.Neptune, BodyId.Pluto,
-    BodyId.MeanNode, BodyId.TrueNode, 
-    BodyId.Vertex, BodyId.ParsFortunae
+    BodyId.MeanNode, BodyId.TrueNode
 ];
 
 export function useChartAnimator(

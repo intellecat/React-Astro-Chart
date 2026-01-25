@@ -12,13 +12,14 @@ interface Props {
     partnerData: ChartData;
     size: number;
     location: GeoLocation;
+    date: Date;
 }
 
-export const ChartsPage: React.FC<Props> = ({ data, transitData, partnerData, size, location }) => {
+export const ChartsPage: React.FC<Props> = ({ data, transitData, partnerData, size, location, date }) => {
     const { type } = useParams<{ type: string }>();
     const view = type || 'natal';
 
-    const animator = useChartAnimator(location);
+    const animator = useChartAnimator(location, date);
 
     const getCode = (type: string) => {
         switch(type) {
