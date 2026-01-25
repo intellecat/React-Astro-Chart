@@ -32,6 +32,13 @@ const MENU = [
             { id: 'stacked', label: 'Stacked Planet Ring' },
             { id: 'aspects', label: 'Aspect Lines' },
         ]
+    },
+    {
+        id: 'animation',
+        title: 'Animation',
+        items: [
+            { id: 'natal-anim', label: 'Animated Natal' },
+        ]
     }
 ];
 

@@ -7,6 +7,7 @@ import { Header } from './layout/Header';
 import { ChartsPage } from './pages/ChartsPage';
 import { ThemesPage } from './pages/ThemesPage';
 import { ComponentsPage } from './pages/ComponentsPage';
+import { AnimationPage } from './pages/AnimationPage';
 import './demo.css';
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
                             data={natal} 
                             transitData={transit} 
                             partnerData={partner} 
-                            size={size} 
+                            size={size}
+                            location={location} 
                         />
                     } />
                     
@@ -58,6 +60,13 @@ function App() {
                     <Route path="/components/:component" element={
                         <ComponentsPage 
                             data={natal} 
+                            size={size} 
+                        />
+                    } />
+                    
+                    <Route path="/animation/:type" element={
+                        <AnimationPage 
+                            location={location} 
                             size={size} 
                         />
                     } />
