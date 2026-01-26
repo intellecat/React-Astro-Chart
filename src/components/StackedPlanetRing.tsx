@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useChart } from './AstroChart';
-import { resolveSynastryCollisions } from '../utils/collision_synastry';
+import { resolveStackedCollisions } from '../utils/collision_stacked';
 import { polarToCartesian } from '../utils/geometry';
 import { BodyId } from '@astrologer/astro-core';
 import { clsx } from 'clsx';
@@ -16,6 +16,7 @@ export interface StackedPlanetRingProps {
     orbitStep?: number; 
     tickStartRadius: number;
     tickLength?: number;
+    maxTracks?: number;
     includeBodies?: BodyId[];
     className?: string;
     dataSource?: 'primary' | 'secondary';
@@ -27,6 +28,7 @@ export const StackedPlanetRing: React.FC<StackedPlanetRingProps> = ({
   orbitStep = 18,
   tickStartRadius,
   tickLength = 10,
+  maxTracks = 2,
   includeBodies,
   className,
   dataSource = 'primary',
@@ -45,8 +47,8 @@ export const StackedPlanetRing: React.FC<StackedPlanetRingProps> = ({
   }, [sourceData, includeBodies]);
 
   const adjustedPlanets = useMemo(() => {
-    return resolveSynastryCollisions(planets, 6);
-  }, [planets]);
+    return resolveStackedCollisions(planets, 6, maxTracks);
+  }, [planets, maxTracks]);
 
   return (
     <g className={clsx("astro-stacked-planet-ring", className)}>
