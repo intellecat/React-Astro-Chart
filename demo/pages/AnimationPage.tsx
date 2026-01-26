@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GeoLocation } from '@astrologer/astro-core';
-import { NatalChart } from '@astrologer/react-chart';
+import { AstroChart, ZodiacWheel, StackedPlanetRing, AspectLines } from '@astrologer/react-chart';
 import { DemoViewer } from '../components/DemoViewer';
 import { TransitControls } from '../components/TransitControls';
 import { useChartAnimator } from '../hooks/useChartAnimator';
@@ -15,15 +15,54 @@ export const AnimationPage: React.FC<Props> = ({ location, size }) => {
     const animator = useChartAnimator(location);
     const [fixedZodiac, setFixedZodiac] = useState(true);
 
-    const code = `const animator = useChartAnimator(location);
-
-// Pass rotationOffset={180} to fix Aries at 9 o'clock
-<NatalChart 
+    const code = `// Custom Composition (No Houses)
+<AstroChart 
   data={animator.data} 
-  rotationOffset={${fixedZodiac ? 180 : 'undefined'}} 
   width={${size}} 
-  height={${size}} 
-/>`;
+  height={${size}}
+  rotationOffset={${fixedZodiac ? 180 : 'undefined'}}
+>
+  <ZodiacWheel />
+  {/* HouseLines Omitted */}
+  <PlanetRing />
+  <AspectLines />
+</AstroChart>`;
+
+    const renderChart = () => {
+        if (!animator.data) return <div style={{ padding: 40, color: '#666' }}>Initializing Engine...</div>;
+
+        const viewBoxSize = 600;
+        const radius = viewBoxSize / 2;
+        const cx = radius;
+        const cy = radius;
+
+        return (
+             <AstroChart 
+                data={animator.data} 
+                width={size} 
+                height={size}
+                viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
+                rotationOffset={fixedZodiac ? 180 : undefined}
+            >
+                {/* Background */}
+                <circle cx={cx} cy={cy} r={radius} fill="var(--astro-color-paper)" stroke="none" />
+                
+                <ZodiacWheel showSignBackgrounds={true} />
+                
+                {/* Inner Ring Circle */}
+                <circle className="astro-inner-ring" cx={cx} cy={cy} r={radius * 0.4} fill="none" />
+                
+                <StackedPlanetRing 
+                    symbolStartRadius={radius * 0.75} 
+                    orbitStep={radius * 0.12}
+                    tickStartRadius={radius - 40} 
+                    maxTracks={3}
+                />
+                
+                <AspectLines showSymbol={true} />
+            </AstroChart>
+        );
+    };
 
     return (
         <DemoViewer title="Animated Natal Chart" code={code}>
@@ -52,16 +91,7 @@ export const AnimationPage: React.FC<Props> = ({ location, size }) => {
                     </div>
                 </div>
                 
-                {animator.data ? (
-                    <NatalChart 
-                        data={animator.data} 
-                        width={size} 
-                        height={size} 
-                        rotationOffset={fixedZodiac ? 180 : undefined}
-                    />
-                ) : (
-                    <div style={{ padding: 40, color: '#666' }}>Initializing Engine...</div>
-                )}
+                {renderChart()}
             </div>
         </DemoViewer>
     );

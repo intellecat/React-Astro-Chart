@@ -28,6 +28,7 @@ export const ComponentsPage: React.FC<Props> = ({ data, size }) => {
   <StackedPlanetRing 
     symbolStartRadius={${size * 0.45}} 
     tickStartRadius={${size * 0.40}} 
+    maxTracks={3}
   />
 </AstroChart>`;
             case 'houses': return `<AstroChart data={data} width={${size}} height={${size}}>
@@ -46,7 +47,7 @@ export const ComponentsPage: React.FC<Props> = ({ data, size }) => {
                 {view === 'zodiac' && <ZodiacWheel />}
                 {view === 'aspects' && <AspectLines />}
                 {view === 'planets' && <PlanetRing />}
-                {view === 'stacked' && <StackedPlanetRing symbolStartRadius={size * 0.45} tickStartRadius={size * 0.40} />}
+                {view === 'stacked' && <StackedPlanetRing symbolStartRadius={size * 0.45} tickStartRadius={size * 0.40} maxTracks={3} />}
                 {view === 'houses' && <HouseLines />}
                 {view === 'degrees' && <DegreeRings />}
             </AstroChart>
