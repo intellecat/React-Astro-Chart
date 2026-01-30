@@ -34,10 +34,11 @@ jobs:
           node-version: 22
           cache: 'pnpm'
 
-      # Note: This might fail if @astrologer/astro-core is a local path dependency not present in the runner.
-      # You might need to clone the astrocore repo or use a private registry.
+      # Install root dependencies (if any needed for scripts) and then demo dependencies
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: |
+          pnpm install --no-frozen-lockfile
+          cd demo && pnpm install --no-frozen-lockfile
 
       - name: Build
         run: pnpm build:demo
