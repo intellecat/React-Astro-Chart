@@ -42,23 +42,32 @@ const MENU = [
     }
 ];
 
-export const Sidebar: React.FC = () => {
+interface Props {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export const Sidebar: React.FC<Props> = ({ isOpen, onClose }) => {
     return (
-        <div className="demo-sidebar">
-            {MENU.map(section => (
-                <div key={section.id}>
-                    <div className="demo-section-title">{section.title}</div>
-                    {section.items.map(item => (
-                        <NavLink 
-                            key={item.id}
-                            to={`/${section.id}/${item.id}`}
-                            className={({ isActive }) => `demo-nav-item ${isActive ? 'active' : ''}`}
-                        >
-                            {item.label}
-                        </NavLink>
-                    ))}
-                </div>
-            ))}
-        </div>
+        <>
+            <div className={`demo-sidebar-overlay ${isOpen ? 'open' : ''}`} onClick={onClose} />
+            <div className={`demo-sidebar ${isOpen ? 'open' : ''}`}>
+                {MENU.map(section => (
+                    <div key={section.id}>
+                        <div className="demo-section-title">{section.title}</div>
+                        {section.items.map(item => (
+                            <NavLink 
+                                key={item.id}
+                                to={`/${section.id}/${item.id}`}
+                                className={({ isActive }) => `demo-nav-item ${isActive ? 'active' : ''}`}
+                                onClick={onClose}
+                            >
+                                {item.label}
+                            </NavLink>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </>
     );
 };

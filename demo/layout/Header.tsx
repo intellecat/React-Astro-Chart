@@ -8,9 +8,10 @@ interface Props {
     setLocation: (l: GeoLocation) => void;
     size: number;
     setSize: (s: number) => void;
+    onMenuClick: () => void;
 }
 
-export const Header: React.FC<Props> = ({ date, setDate, location, setLocation, size, setSize }) => {
+export const Header: React.FC<Props> = ({ date, setDate, location, setLocation, size, setSize, onMenuClick }) => {
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const d = new Date(e.target.value);
         if (!isNaN(d.getTime())) {
@@ -27,52 +28,54 @@ export const Header: React.FC<Props> = ({ date, setDate, location, setLocation, 
     };
 
     return (
-        <div className="demo-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', boxSizing: 'border-box' }}>
-            <h3 style={{ margin: 0, color: '#333', whiteSpace: 'nowrap' }}>@astrologer/react-chart</h3>
+        <div className="demo-header">
+            <div className="demo-header-left">
+                <button className="demo-menu-btn" onClick={onMenuClick}>☰</button>
+                <h3>@astrologer/react-chart</h3>
+            </div>
 
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <div className="demo-header-controls">
                 <div className="demo-control-group">
-                    <label style={{ fontSize: '12px' }}>Date</label>
+                    <label>Date</label>
                     <input 
                         type="datetime-local" 
-                        className="demo-input"
-                        style={{ padding: '2px 4px', fontSize: '13px' }}
+                        className="demo-input date-input"
                         value={date.toISOString().slice(0, 16)}
                         onChange={handleDateChange}
                     />
                 </div>
 
-                <div className="demo-control-group" style={{ gap: '4px' }}>
-                    <label style={{ fontSize: '12px' }}>Lat</label>
+                <div className="demo-control-group">
+                    <label>Lat</label>
                     <input 
                         type="number" 
-                        className="demo-input"
-                        style={{ width: '42px', padding: '2px 4px', fontSize: '13px' }}
+                        className="demo-input coord-input"
                         value={location.latitude}
                         onChange={handleLatChange}
                     />
-                    <label style={{ fontSize: '12px' }}>Lon</label>
+                </div>
+                <div className="demo-control-group">
+                    <label>Lon</label>
                     <input 
                         type="number" 
-                        className="demo-input"
-                        style={{ width: '42px', padding: '2px 4px', fontSize: '13px' }}
+                        className="demo-input coord-input"
                         value={location.longitude}
                         onChange={handleLonChange}
                     />
                 </div>
                 
-                <div className="demo-control-group" style={{ gap: '4px' }}>
-                    <label style={{ fontSize: '12px' }}>Size</label>
+                <div className="demo-control-group">
+                    <label>Size</label>
                     <input 
                         type="range" 
                         min="300" 
                         max="1000" 
                         step="10" 
-                        style={{ width: '80px' }}
+                        className="size-input"
                         value={size} 
                         onChange={(e) => setSize(Number(e.target.value))} 
                     />
-                    <span style={{ fontSize: '11px', color: '#666', minWidth: '35px' }}>{size}px</span>
+                    <span className="size-label">{size}px</span>
                 </div>
             </div>
         </div>

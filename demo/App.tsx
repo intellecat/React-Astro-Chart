@@ -11,9 +11,11 @@ import { AnimationPage } from './pages/AnimationPage';
 import './demo.css';
 
 function App() {
-  const [date, setDate] = useState(new Date('1988-06-18T09:00:00Z'));
-  const [location, setLocation] = useState<GeoLocation>({ latitude: 33.0, longitude: 120.0 });
+  // Steve Jobs: Feb 24, 1955, 19:15 PST (San Francisco)
+  const [date, setDate] = useState(new Date('1955-02-25T03:15:00Z'));
+  const [location, setLocation] = useState<GeoLocation>({ latitude: 37.7749, longitude: -122.4194 });
   const [size, setSize] = useState(600);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const { isReady, natal, transit, partner } = useDemoData(date, location);
 
@@ -30,10 +32,14 @@ function App() {
                 location={location} 
                 setLocation={setLocation} 
                 size={size} 
-                setSize={setSize} 
+                setSize={setSize}
+                onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)}
             />
             
-            <Sidebar />
+            <Sidebar 
+                isOpen={isSidebarOpen} 
+                onClose={() => setIsSidebarOpen(false)} 
+            />
             
             <main className="demo-content">
                 <Routes>

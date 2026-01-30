@@ -4,28 +4,68 @@ body {
     background-color: #f5f5f5;
     color: #333;
 }
+
 .demo-layout {
     display: grid;
     grid-template-columns: 250px 1fr;
-    grid-template-rows: auto 1fr; /* Header auto height */
+    grid-template-rows: auto 1fr;
     height: 100vh;
 }
+
+/* Header Styles */
 .demo-header {
     grid-column: 1 / -1;
     background-color: white;
     border-bottom: 1px solid #ddd;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    gap: 20px;
-    flex-wrap: wrap; /* Allow wrapping for inputs */
+    flex-wrap: wrap;
+    z-index: 10;
 }
+
+.demo-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.demo-header h3 {
+    margin: 0;
+    color: #333;
+    white-space: nowrap;
+}
+
+.demo-header-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.demo-menu-btn {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    color: #333;
+}
+
+/* Sidebar Styles */
 .demo-sidebar {
     background-color: #fff;
     border-right: 1px solid #ddd;
     padding: 20px;
     overflow-y: auto;
 }
+
+.demo-sidebar-overlay {
+    display: none;
+}
+
+/* Content Styles */
 .demo-content {
     padding: 20px;
     overflow-y: auto;
@@ -34,6 +74,12 @@ body {
     align-items: center;
     background-color: #fafafa;
 }
+
+.demo-content svg {
+    max-width: 100%;
+    height: auto;
+}
+
 .demo-nav-item {
     display: block;
     padding: 10px 15px;
@@ -44,13 +90,16 @@ body {
     color: #555;
     font-weight: 500;
 }
+
 .demo-nav-item:hover {
     background-color: #f0f0f0;
 }
+
 .demo-nav-item.active {
     background-color: #e6f0ff;
     color: #0066cc;
 }
+
 .demo-section-title {
     font-size: 0.85em;
     text-transform: uppercase;
@@ -59,18 +108,151 @@ body {
     font-weight: bold;
     letter-spacing: 0.05em;
 }
+
+/* Control Group Styles */
 .demo-control-group {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .demo-control-group label {
     font-size: 0.9em;
     color: #666;
+    white-space: nowrap;
 }
+
 .demo-input {
     padding: 6px 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 13px;
+}
+
+.date-input {
+    padding: 2px 4px;
+}
+
+.coord-input {
+    width: 50px;
+    padding: 2px 4px;
+}
+
+.size-input {
+    width: 80px;
+}
+
+.size-label {
+    font-size: 11px;
+    color: #666;
+    min-width: 35px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .demo-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .demo-menu-btn {
+        display: block;
+    }
+
+    /* Header adjustments */
+    .demo-header {
+        padding: 10px 15px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .demo-header-left {
+        gap: 15px;
+    }
+
+    .demo-header-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        width: 100%;
+        background-color: #f9f9f9;
+        padding: 12px;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    .demo-control-group {
+        display: flex;
+        flex-direction: row; /* Horizontal layout for lines */
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    /* Date line */
+    .demo-control-group:nth-child(1) {
+        grid-column: 1 / -1;
+    }
+
+    /* Size line */
+    .demo-control-group:nth-child(4) {
+        grid-column: 1 / -1;
+    }
+
+    .demo-control-group label {
+        min-width: 35px; /* Consistent label width */
+    }
+
+    .demo-input {
+        flex: 1;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .coord-input {
+        width: 100%;
+    }
+    
+    .demo-input.size-input {
+        flex: 1;
+    }
+
+    /* Sidebar as Drawer */
+    .demo-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 250px;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    }
+
+    .demo-sidebar.open {
+        transform: translateX(0);
+    }
+
+    .demo-sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 999;
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .demo-sidebar-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Content Area */
+    .demo-content {
+        padding: 10px;
+    }
 }
