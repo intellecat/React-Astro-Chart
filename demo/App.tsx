@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { GeoLocation } from '@astrologer/astro-core';
 import { useDemoData } from './hooks/useDemoData';
 import { Sidebar } from './layout/Sidebar';
@@ -24,7 +24,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
         <div className="demo-layout">
             <Header 
                 date={date} 
@@ -80,7 +80,7 @@ function App() {
                 </Routes>
             </main>
         </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
