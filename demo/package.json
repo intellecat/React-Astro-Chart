@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@astrologer/astro-core": "link:../../astrocore/packages/core",
+    "@astrologer/astro-core": "^1.0.0",
     "@swisseph/browser": "^1.1.0",
     "clsx": "^2.1.1",
     "react": "^19.0.0",
