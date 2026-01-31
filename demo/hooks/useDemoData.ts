@@ -38,7 +38,7 @@ export function useDemoData(date: Date, location: GeoLocation) {
     const bodies = [
         BodyId.Sun, BodyId.Moon, BodyId.Mercury, BodyId.Venus, BodyId.Mars,
         BodyId.Jupiter, BodyId.Saturn, BodyId.Uranus, BodyId.Neptune, BodyId.Pluto,
-        BodyId.TrueNode, BodyId.LilithMean, BodyId.Chiron
+        BodyId.TrueNode
     ];
 
     try {
