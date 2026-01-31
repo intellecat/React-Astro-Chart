@@ -23,6 +23,7 @@ export function useDemoData(date: Date, location: GeoLocation) {
         try {
             const swe = new SwissEphemeris();
             await swe.init(wasmUrl);
+            await swe.loadStandardEphemeris();
             setSwissEphemeris(swe);
             setIsReady(true);
         } catch (e) {
@@ -38,7 +39,7 @@ export function useDemoData(date: Date, location: GeoLocation) {
     const bodies = [
         BodyId.Sun, BodyId.Moon, BodyId.Mercury, BodyId.Venus, BodyId.Mars,
         BodyId.Jupiter, BodyId.Saturn, BodyId.Uranus, BodyId.Neptune, BodyId.Pluto,
-        BodyId.TrueNode
+        BodyId.TrueNode, BodyId.LilithMean, BodyId.Chiron
     ];
 
     try {
