@@ -4,6 +4,17 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/index.css": "./dist/index.css"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "cd demo && pnpm dev",
     "build": "tsc && vite build",
@@ -26,6 +37,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "^5.7.3",
-    "vite": "^6.0.7"
+    "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
