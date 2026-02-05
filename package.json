@@ -4,6 +4,10 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intellecat/React-Astro-Chart"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -25,7 +29,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@astrologer/astro-core": "^1.0.0",
+    "@astrologer/astro-core": "^1.0.1",
     "@swisseph/browser": "^1.1.0",
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.0.1"

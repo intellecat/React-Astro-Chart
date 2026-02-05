@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@astrologer/astro-core": "^1.0.0",
+    "@astrologer/astro-core": "^1.0.1",
     "@astrologer/react-chart": "link:..",
     "@swisseph/node": "^1.2.2",
     "next": "16.1.6",
