@@ -1,6 +1,6 @@
 {
   "name": "@astrologer/react-chart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://intellecat.github.io/React-Astro-Chart/",
   "type": "module",
   "main": "dist/index.js",
